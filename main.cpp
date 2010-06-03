@@ -1,44 +1,10 @@
-#include <stdlib.h>
-#include <iostream>
-#include <queue>
-#include <cstdlib>
-#include "LineReader.h"
-#include "FrameTable.h"
-
-using namespace std;
-
-#define MAXINT 2147483647
-#define Q 3
-
-
-//Process class defines probabilities.
-class Process{
-public:
-	float A, B, C;
-	int size;
-	Process ();
-	Process (float, float, float, int);
-};
-
-//Constructor
-Process::Process (float a, float b, float c, int S){
-	A = a;
-	B = b;
-	C = c;
-	size = S;
-}
-
-Process::Process (){
-}
-
-int driver(double, int, Process);
-int randomNumber(int);
+#include "main.h"
 
 int main(int argc, char *argv[]){
 	
 	int M, P, S, J, N;
 	
-	//Convert Input string values to integers
+	//Convert argument string values to integers
 	M = atoi(argv[1]);
 	P = atoi(argv[2]);
 	S = atoi(argv[3]);
@@ -85,11 +51,12 @@ int main(int argc, char *argv[]){
 	int ran = reader.nextRan();
 	double y = ran/(MAXINT + 1);
 	
-	int w = 111;
 	Process p = pQue.front();
+	int w = (111 + p.size)%p.size;
+	
 	for(int i = 0; i < Q; i++){
+		cout << ft.request(w);
 		w = driver(y, (w + p.size)%p.size, p);
-		cout << w << endl;
 	}
 	
 }
@@ -102,7 +69,7 @@ int driver(double y, int w, Process p){
 	else if (y < p.A + p.B + p.C)
 		return (w + 4 + p.size)%p.size;
 	else
-		return randomNumber(p.size);
+		return randomNumber(p.size-1);
 }
 
 
