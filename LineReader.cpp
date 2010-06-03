@@ -26,7 +26,7 @@ string LineReader::nextLine(){
 	}
 }
 
-int LineReader::nextRef(){
+int LineReader::nextRan(){
 	int ref = atoi(this->nextLine().c_str());
 	return ref;
 }

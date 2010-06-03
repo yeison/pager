@@ -20,3 +20,7 @@ bool FrameTable::request(int ref){
 	frameVector.push_back(ref);
 	return false;
 }
+
+//void FrameTable::cmpFifo(){
+//	
+//}

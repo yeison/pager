@@ -13,6 +13,6 @@ class LineReader{
 public:
 	LineReader(const char *);
 	string nextLine();
-	int nextRef();
+	int nextRan();
 };
 

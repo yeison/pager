@@ -3,6 +3,7 @@
  *  paging
  */
 #include <deque>
+#include <queue>
 
 using namespace std;
 
