@@ -16,3 +16,15 @@ public:
 	FrameTable (int, int);
 	bool request (int);
 };
+
+class Page{	
+	int pageId;
+	int pageSize;
+public:
+	static int count;
+	Page(){pageId = count++;}
+	Page(int s){
+		pageId = count++;
+		pageSize = s;
+	}
+};

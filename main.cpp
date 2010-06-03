@@ -1,7 +1,8 @@
 #include "main.h"
+//0 Pages at the beginning of this program.
+int Page::count = 0;
 
 int main(int argc, char *argv[]){
-	
 	int M, P, S, J, N;
 	
 	//Convert argument string values to integers
@@ -24,23 +25,23 @@ int main(int argc, char *argv[]){
 		case 1:
 			processes = 1;
 			for(int i = 0; i < processes; i++)
-				pQue.push(Process(1, 0, 0, S));
+				pQue.push(Process(1, 0, 0, S, P));
 			break;
 		case 2:
 			processes = 4;
 			for(int i = 0; i < processes; i++)
-				pQue.push(Process(1, 0, 0, S));
+				pQue.push(Process(1, 0, 0, S, P));
 			break;
 		case 3:
 			processes = 4;
 			for(int i = 0; i < processes; i++)
-				pQue.push(Process(0, 0, 0, S));
+				pQue.push(Process(0, 0, 0, S, P));
 			break;
 		case 4:
-			pQue.push(Process(.75, .25, 0, S));
-			pQue.push(Process(.75, 0, .25, S));
-			pQue.push(Process(.75, .125, .125, S));
-			pQue.push(Process(.5, .125, .125, S));
+			pQue.push(Process(.75, .25, 0, S, P));
+			pQue.push(Process(.75, 0, .25, S, P));
+			pQue.push(Process(.75, .125, .125, S, P));
+			pQue.push(Process(.5, .125, .125, S, P));
 					  
 		default:
 			break;

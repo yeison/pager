@@ -20,22 +20,33 @@ using namespace std;
 //Process class defines probabilities.
 class Process{
 public:
+	Page pages[];
 	float A, B, C;
 	int size;
+	int pageSize;
 	Process ();
-	Process (float, float, float, int);
+	Process (float, float, float, int, int);
+	void createPages();
 };
 
 //Constructor
-Process::Process (float a, float b, float c, int S){
+Process::Process(float a, float b, float c, int S, int P){
 	A = a;
 	B = b;
 	C = c;
 	size = S;
+	pageSize = P;
 }
 
-Process::Process (){
+Process::Process(){
 }
+
+void Process::createPages(){
+	for(int i = 0; i < this->size/pageSize; i ++)
+		pages[i] = Page(pageSize);
+	
+}
+
 
 int driver(double, int, Process);
 int randomNumber(int);
