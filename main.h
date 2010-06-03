@@ -1,7 +1,6 @@
 /*
  *  main.h
  *  paging
- *
 */
 
 #include <stdlib.h>

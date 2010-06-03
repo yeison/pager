@@ -57,7 +57,8 @@ int main(int argc, char *argv[]){
 		int ran = reader.nextRan();
 		double y = ran/(MAXINT + 1.0);
 		cout << w << " ";
-		cout << ft.request(w) << " " << y << endl;
+		int pageNumber = w/P;
+		cout << ft.request(p.pages[pageNumber]) << " " << y << endl;
 		w = driver(y, (w + p.size)%p.size, p);
 	}
 	

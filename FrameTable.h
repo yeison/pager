@@ -7,16 +7,6 @@
 
 using namespace std;
 
-class FrameTable{
-	int machineSize;
-	int pageSize;
-	int frames;
-	deque<int> frameVector;
-public:
-	FrameTable (int, int);
-	bool request (int);
-};
-
 class Page{	
 	int pageId;
 	int pageSize;
@@ -27,4 +17,18 @@ public:
 		pageId = count++;
 		pageSize = s;
 	}
+	//Overload the == operator to define equality by pageId.
+	bool operator== (Page that){
+		return this->pageId == that.pageId;
+	}
+};
+
+class FrameTable{
+	int machineSize;
+	int pageSize;
+	int frames;
+	deque<Page> frameVector;
+public:
+	FrameTable (int, int);
+	bool request (Page);
 };

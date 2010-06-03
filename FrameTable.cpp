@@ -9,15 +9,15 @@ FrameTable::FrameTable (int m, int p){
 	machineSize = m;
 	pageSize = p;
 	frames = machineSize/pageSize;
-	this->frameVector = deque<int>(frames);
+	this->frameVector = deque<Page>(frames);
 }
 
-bool FrameTable::request(int ref){
+bool FrameTable::request(Page page){
 	for(int i = 0; i < frames; i++)
-		if(frameVector[i] == ref)
+		if(frameVector[i] == page)
 			return true;
 	frameVector.pop_front();
-	frameVector.push_back(ref);
+	frameVector.push_back(page);
 	return false;
 }
 
