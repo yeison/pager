@@ -48,14 +48,15 @@ int main(int argc, char *argv[]){
 
 	LineReader reader("random-numbers.txt");
 	FrameTable ft(M, P);
-	int ran = reader.nextRan();
-	double y = ran/(MAXINT + 1);
 	
 	Process p = pQue.front();
 	int w = (111 + p.size)%p.size;
 	
 	for(int i = 0; i < Q; i++){
-		cout << ft.request(w);
+		int ran = reader.nextRan();
+		double y = ran/(MAXINT + 1.0);
+		cout << w << " ";
+		cout << ft.request(w) << " " << y << endl;
 		w = driver(y, (w + p.size)%p.size, p);
 	}
 	
