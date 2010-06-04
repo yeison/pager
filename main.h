@@ -18,7 +18,9 @@ using namespace std;
 
 //Process class defines probabilities.
 class Process{
+	bool dirty;
 public:
+	int w;
 	Page pages[];
 	float A, B, C;
 	int size;
@@ -26,6 +28,7 @@ public:
 	Process ();
 	Process (float, float, float, int, int);
 	void createPages();
+	void setW(int);
 };
 
 //Constructor
@@ -44,6 +47,13 @@ void Process::createPages(){
 	for(int i = 0; i < this->size/pageSize; i ++)
 		pages[i] = Page(pageSize);
 	
+}
+
+void Process::setW(int k){
+	if(!dirty){
+		w = (111*k + size)%size;
+		dirty = true;
+	}
 }
 
 

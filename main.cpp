@@ -16,10 +16,10 @@ int main(int argc, char *argv[]){
 	for(int i = 1; i < argc; i++)
 		cout << argv[i] << " ";
 	cout << endl;
-
+	
 	int processes;
 	queue<Process> pQue;
-
+	
 	//Determine the proper "Job Mix"
 	switch (J) {
 		case 1:
@@ -38,28 +38,33 @@ int main(int argc, char *argv[]){
 				pQue.push(Process(0, 0, 0, S, P));
 			break;
 		case 4:
+			processes = 4;
 			pQue.push(Process(.75, .25, 0, S, P));
 			pQue.push(Process(.75, 0, .25, S, P));
 			pQue.push(Process(.75, .125, .125, S, P));
 			pQue.push(Process(.5, .125, .125, S, P));
-					  
+			
 		default:
 			break;
 	}
-
+	
 	LineReader reader("random-numbers.txt");
 	FrameTable ft(M, P);
-	
-	Process p = pQue.front();
-	int w = (111 + p.size)%p.size;
-	
-	for(int i = 0; i < Q; i++){
-		int ran = reader.nextRan();
-		double y = ran/(MAXINT + 1.0);
-		cout << w << " ";
-		int pageNumber = w/P;
-		cout << ft.request(p.pages[pageNumber]) << " " << y << endl;
-		w = driver(y, (w + p.size)%p.size, p);
+	int k = 1;
+	for(int j = 0; j < N; ){
+		Process p = pQue.front();
+		p.setW(k);
+		for(int i = 0; i < Q && j < N; i++, j++){
+			int ran = reader.nextRan();
+			double y = ran/(MAXINT + 1.0);
+			cout << p.w << " ";
+			int pageNumber = p.w/P;
+			cout << ft.request(p.pages[pageNumber]) << " " << y << endl;
+			p.w = driver(y, (p.w + p.size)%p.size, p);
+		}
+		k < processes ? k++:k=1;
+		pQue.pop();
+		pQue.push(p);
 	}
 	
 }
