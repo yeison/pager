@@ -12,13 +12,13 @@ FrameTable::FrameTable (int m, int p){
 	this->frameVector = deque<Page>(frames);
 }
 
-bool FrameTable::request(Page page){
-	for(int i = 0; i < frames; i++)
+int FrameTable::request(Page page){
+	for(int i = (frames - 1); i >= 0; i--)
 		if(frameVector[i] == page)
-			return true;
+			return i;
 	frameVector.pop_front();
 	frameVector.push_back(page);
-	return false;
+	return -1;
 }
 
 //void FrameTable::cmpFifo(){

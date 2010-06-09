@@ -25,24 +25,24 @@ int main(int argc, char *argv[]){
 		case 1:
 			processes = 1;
 			for(int i = 0; i < processes; i++)
-				pQue.push(Process(1, 0, 0, S, P));
+				pQue.push(Process(1, 0, 0, argv));
 			break;
 		case 2:
 			processes = 4;
 			for(int i = 0; i < processes; i++)
-				pQue.push(Process(1, 0, 0, S, P));
+				pQue.push(Process(1, 0, 0, argv));
 			break;
 		case 3:
 			processes = 4;
 			for(int i = 0; i < processes; i++)
-				pQue.push(Process(0, 0, 0, S, P));
+				pQue.push(Process(0, 0, 0, argv));
 			break;
 		case 4:
 			processes = 4;
-			pQue.push(Process(.75, .25, 0, S, P));
-			pQue.push(Process(.75, 0, .25, S, P));
-			pQue.push(Process(.75, .125, .125, S, P));
-			pQue.push(Process(.5, .125, .125, S, P));
+			pQue.push(Process(.75, .25, 0, argv));
+			pQue.push(Process(.75, 0, .25, argv));
+			pQue.push(Process(.75, .125, .125, argv));
+			pQue.push(Process(.5, .125, .125, argv));
 			
 		default:
 			break;
@@ -51,16 +51,19 @@ int main(int argc, char *argv[]){
 	LineReader reader("random-numbers.txt");
 	FrameTable ft(M, P);
 	int k = 1;
-	for(int j = 0; j < N; ){
+	for(int j = 0; j < N*processes; ){
 		Process p = pQue.front();
 		p.setW(k);
-		for(int i = 0; i < Q && j < N; i++, j++){
+		for(int i = 0; i < Q && j < N*processes && p.refRemaining > 0; i++, j++){
 			int ran = reader.nextRan();
 			double y = ran/(MAXINT + 1.0);
-			cout << p.w << " ";
+			cout << j << " " << p.w << " ";
 			int pageNumber = p.w/P;
-			cout << ft.request(p.pages[pageNumber]) << " " << y << endl;
+			ft.request(p.pages[pageNumber]);
+			faultMessage(k, p.w, pageNumber, 2);
 			p.w = driver(y, (p.w + p.size)%p.size, p);
+			//One less reference remaining for this p (process).
+			p.refRemaining--;
 		}
 		k < processes ? k++:k=1;
 		pQue.pop();
@@ -87,3 +90,4 @@ int randomNumber(int hi)
 	const float scale = rand()/float(RAND_MAX);
 	return int(scale*hi);
 }
+

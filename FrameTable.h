@@ -19,7 +19,7 @@ public:
 	}
 	//Overload the == operator to define equality by pageId.
 	bool operator== (Page that){
-		return this->pageId == that.pageId;
+		return pageId == that.pageId;
 	}
 };
 
@@ -30,5 +30,5 @@ class FrameTable{
 	deque<Page> frameVector;
 public:
 	FrameTable (int, int);
-	bool request (Page);
+	int request (Page);
 };
