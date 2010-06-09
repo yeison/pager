@@ -19,7 +19,16 @@ using namespace std;
 int driver(double, int, Process);
 int randomNumber(int);
 
-void faultMessage(int k, int ref, int pageNumber, int frameNumber){
-	printf("%i references\n", k);
+int prevFrameNumber = 1;
+
+void faultMessage(int p, int ref, int pageNumber, int frameNumber){
+	if(frameNumber == -1){
+		frameNumber = prevFrameNumber - 1;
+		printf("Process %i references word %i (page %i):\nFAULT, using free frame %i\n", p, ref, pageNumber, frameNumber);
+	}
+	else{
+		printf("Process %i references word %i (page %i):\nhit in frame %i\n", p, ref, pageNumber, frameNumber);
+		prevFrameNumber = frameNumber;
+	}
 }
 

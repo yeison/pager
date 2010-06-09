@@ -57,10 +57,10 @@ int main(int argc, char *argv[]){
 		for(int i = 0; i < Q && j < N*processes && p.refRemaining > 0; i++, j++){
 			int ran = reader.nextRan();
 			double y = ran/(MAXINT + 1.0);
-			cout << j << " " << p.w << " ";
+			//cout << j << " " << p.w << " ";
 			int pageNumber = p.w/P;
-			ft.request(p.pages[pageNumber]);
-			faultMessage(k, p.w, pageNumber, 2);
+			int frameNumber = ft.request(p.pages[pageNumber]);
+			faultMessage(k, p.w, pageNumber, frameNumber);
 			p.w = driver(y, (p.w + p.size)%p.size, p);
 			//One less reference remaining for this p (process).
 			p.refRemaining--;
