@@ -28,7 +28,10 @@ class FrameTable{
 	int pageSize;
 	int frames;
 	deque<Page> frameVector;
+	void fifoReplace(Page);
 public:
 	FrameTable (int, int);
 	int request (Page);
 };
+
+
