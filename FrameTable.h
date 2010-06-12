@@ -11,7 +11,7 @@ class Page{
 	int pageId;
 	int pageSize;
 public:
-	int process, number;
+	int process, number, inTime, outTime;
 	static int count;
 	Page(){pageId = count++;}
 	Page(int s){
@@ -36,10 +36,12 @@ class FrameTable{
 	int frames;
 	int frame_ptr;
 	deque<Page> frameVector;
-	void fifoReplace(Page);
+	void fifoReplace(Page, int);
 public:
 	FrameTable (int, int);
-	int request (Page);
+	int request (Page, int);
+	int faults[5];
+	float residency[5];
 };
 
 
