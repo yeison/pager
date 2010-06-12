@@ -54,9 +54,6 @@ void FrameTable::fifoReplace(Page page, int time){
 	
 	//Calculate residency time.
 	evicted.outTime = time;
-	if(residency[evicted.process] == 0)
-		residency[evicted.process] = evicted.outTime - evicted.inTime;
-	else
-		residency[evicted.process] = ((residency[evicted.process]) + (evicted.outTime - evicted.inTime))/2; 
+	residency[evicted.process].push_back(evicted.outTime - evicted.inTime);
 	faults[page.process]++;
 }

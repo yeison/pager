@@ -4,6 +4,7 @@
  */
 #include <deque>
 #include <queue>
+#include <vector>
 
 using namespace std;
 
@@ -41,7 +42,7 @@ public:
 	FrameTable (int, int);
 	int request (Page, int);
 	int faults[5];
-	float residency[5];
+	vector<float> residency[5];
 };
 
 

@@ -73,16 +73,31 @@ int main(int argc, char *argv[]){
 	}
 	
 	cout << endl;
+
 	int totalFaults;
-	float overallAvgResidency;
 	int i;
+	float overall;
 	for (i = 1; i <= processes; i++) {
 		totalFaults += ft.faults[i];
-		overallAvgResidency += ft.residency[i];
-		printf("\nProcess %i had %i faults and %f average residency.", i, ft.faults[i], ft.residency[i]);
+		
+		vector<float>::iterator iter;
+		iter = ft.residency[i].begin();		
+		int j = 0;
+		float total;
+		while(iter != ft.residency[i].end()){
+			total += *iter;
+			++iter;
+			j++;
+		}
+		
+		float avg = total/j;
+		total = 0;
+		printf("\nProcess %i had %i faults and %f average residency.", i, ft.faults[i], avg);
+		
+		overall += avg;
 	}
 	
-	printf("\nTotal number of faults is %i, and the overall average residency is %f.\n", totalFaults, overallAvgResidency/(i-1));
+	printf("\nTotal number of faults is %i, and the overall average residency is %f.\n", totalFaults, overall/(i-1));
 	
 }
 
