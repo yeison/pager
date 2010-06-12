@@ -6,10 +6,11 @@
 #include "Process.h"
 
 //Constructor
-Process::Process(float a, float b, float c, char *argv[]){
+Process::Process(float a, float b, float c, int n, char *argv[]){
 	A = a;
 	B = b;
 	C = c;
+	number = n;
 	
 	//Convert argument string values to integers
 	int M, P, S, J, N;
@@ -28,8 +29,8 @@ Process::Process(float a, float b, float c, char *argv[]){
 
 void Process::createPages(){
 	for(int i = 0; i < this->size/pageSize; i ++){
-		Page temp(pageSize);
-		pages.push_back(pageSize);
+		Page temp(pageSize, number, i);
+		pages.push_back(temp);
 	}
 	
 }

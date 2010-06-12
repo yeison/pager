@@ -11,11 +11,18 @@ class Page{
 	int pageId;
 	int pageSize;
 public:
+	int process, number;
 	static int count;
 	Page(){pageId = count++;}
 	Page(int s){
 		pageId = count++;
 		pageSize = s;
+	}
+	Page(int s, int p, int n){
+		pageId = count++;
+		pageSize = s;
+		process = p;
+		number = n;
 	}
 	//Overload the == operator to define equality by pageId.
 	bool operator== (Page that){
@@ -27,6 +34,7 @@ class FrameTable{
 	int machineSize;
 	int pageSize;
 	int frames;
+	int frame_ptr;
 	deque<Page> frameVector;
 	void fifoReplace(Page);
 public:

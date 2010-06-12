@@ -12,10 +12,10 @@ public:
 	int w;
 	vector<Page> pages;
 	float A, B, C;
-	int size, pageSize, refRemaining;
+	int size, pageSize, refRemaining, number;
 	
 	Process();
-	Process (float, float, float, char**);	
+	Process (float, float, float, int, char**);	
 	
 	void createPages();
 	void setW(int);

@@ -25,24 +25,24 @@ int main(int argc, char *argv[]){
 		case 1:
 			processes = 1;
 			for(int i = 0; i < processes; i++)
-				pQue.push(Process(1, 0, 0, argv));
+				pQue.push(Process(1, 0, 0, i+1, argv));
 			break;
 		case 2:
 			processes = 4;
 			for(int i = 0; i < processes; i++)
-				pQue.push(Process(1, 0, 0, argv));
+				pQue.push(Process(1, 0, 0, i+1, argv));
 			break;
 		case 3:
 			processes = 4;
 			for(int i = 0; i < processes; i++)
-				pQue.push(Process(0, 0, 0, argv));
+				pQue.push(Process(0, 0, 0, i+1, argv));
 			break;
 		case 4:
 			processes = 4;
-			pQue.push(Process(.75, .25, 0, argv));
-			pQue.push(Process(.75, 0, .25, argv));
-			pQue.push(Process(.75, .125, .125, argv));
-			pQue.push(Process(.5, .125, .125, argv));
+			pQue.push(Process(.75, .25, 0, 1, argv));
+			pQue.push(Process(.75, 0, .25, 2, argv));
+			pQue.push(Process(.75, .125, .125, 3, argv));
+			pQue.push(Process(.5, .125, .125, 4, argv));
 			
 		default:
 			break;
