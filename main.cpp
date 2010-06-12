@@ -60,8 +60,8 @@ int main(int argc, char *argv[]){
 			double y = ran/(MAXINT + 1.0);
 			//cout << j << " " << p.w << " ";
 			int pageNumber = p.w/P;
-			int frameNumber = ft.request(p.pages[pageNumber], time);
-			faultMessage(k, p.w, pageNumber, frameNumber);
+			faultMessage(k, p.w, pageNumber);
+			ft.request(p.pages[pageNumber], time);
 			p.w = driver(y, (p.w + p.size)%p.size, p);
 			//One less reference remaining for this p (process).
 			p.refRemaining--;
@@ -72,13 +72,14 @@ int main(int argc, char *argv[]){
 		pQue.push(p);
 	}
 	
+	cout << endl;
 	int totalFaults;
 	float overallAvgResidency;
 	int i;
 	for (i = 1; i <= processes; i++) {
 		totalFaults += ft.faults[i];
 		overallAvgResidency += ft.residency[i];
-		printf("\nProcess %i had %i faults and %f average residency.\n", i, ft.faults[i], ft.residency[i]);
+		printf("\nProcess %i had %i faults and %f average residency.", i, ft.faults[i], ft.residency[i]);
 	}
 	
 	printf("\nTotal number of faults is %i, and the overall average residency is %f.\n", totalFaults, overallAvgResidency/(i-1));

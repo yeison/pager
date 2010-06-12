@@ -21,14 +21,7 @@ int randomNumber(int);
 
 int prevFrameNumber = 1;
 
-void faultMessage(int p, int ref, int pageNumber, int frameNumber){
-	if(frameNumber < 0){
-		frameNumber = (-frameNumber) - 1;
-		printf("Process %i references word %i (page %i):\n", p, ref, pageNumber);
-	}
-	else{
-		printf("Process %i references word %i (page %i):\n", p, ref, pageNumber);
-		prevFrameNumber = frameNumber;
-	}
+void faultMessage(int p, int ref, int pageNumber){
+	printf("\nProcess %i references word %i (page %i)", p, ref, pageNumber);
 }
 
