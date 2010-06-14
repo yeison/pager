@@ -13,6 +13,7 @@
 using namespace std;
 
 #define MAXINT 2147483647
+#define MAXI 2147483647
 #define Q 3
 
 

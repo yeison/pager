@@ -4,22 +4,22 @@ int Page::count = 0;
 
 int main(int argc, char *argv[]){
 	int M, P, S, J, N;
-	
+
 	//Convert argument string values to integers
 	M = atoi(argv[1]);
 	P = atoi(argv[2]);
 	S = atoi(argv[3]);
 	J = atoi(argv[4]);
 	N = atoi(argv[5]);
-	
-	
+
+
 	for(int i = 1; i < argc; i++)
 		cout << argv[i] << " ";
 	cout << endl;
-	
+
 	int processes;
 	queue<Process> pQue;
-	
+
 	//Determine the proper "Job Mix"
 	switch (J) {
 		case 1:
@@ -43,12 +43,12 @@ int main(int argc, char *argv[]){
 			pQue.push(Process(.75, 0, .25, 2, argv));
 			pQue.push(Process(.75, .125, .125, 3, argv));
 			pQue.push(Process(.5, .125, .125, 4, argv));
-			
+
 		default:
 			break;
 	}
-	
-	LineReader reader("random-numbers.txt");
+
+	LineReader reader("random-numbers");
 	FrameTable ft(M, P);
 	int k = 1;
 	int time = 1;
@@ -58,7 +58,6 @@ int main(int argc, char *argv[]){
 		for(int i = 0; i < Q && j < N*processes && p.refRemaining > 0; i++, j++){
 			int ran = reader.nextRan();
 			double y = ran/(MAXINT + 1.0);
-			//cout << j << " " << p.w << " ";
 			int pageNumber = p.w/P;
 			faultMessage(k, p.w, pageNumber);
 			ft.request(p.pages[pageNumber], time);
@@ -71,7 +70,7 @@ int main(int argc, char *argv[]){
 		pQue.pop();
 		pQue.push(p);
 	}
-	
+
 	cout << endl;
 
 	int totalFaults;
@@ -79,9 +78,9 @@ int main(int argc, char *argv[]){
 	float overall;
 	for (i = 1; i <= processes; i++) {
 		totalFaults += ft.faults[i];
-		
+
 		vector<float>::iterator iter;
-		iter = ft.residency[i].begin();		
+		iter = ft.residency[i].begin();
 		int j = 0;
 		float total;
 		while(iter != ft.residency[i].end()){
@@ -89,16 +88,16 @@ int main(int argc, char *argv[]){
 			++iter;
 			j++;
 		}
-		
+
 		float avg = total/j;
 		total = 0;
 		printf("\nProcess %i had %i faults and %f average residency.", i, ft.faults[i], avg);
-		
+
 		overall += avg;
 	}
-	
+
 	printf("\nTotal number of faults is %i, and the overall average residency is %f.\n", totalFaults, overall/(i-1));
-	
+
 }
 
 int driver(double y, int w, Process p){

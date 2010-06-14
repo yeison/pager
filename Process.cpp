@@ -25,6 +25,8 @@ Process::Process(float a, float b, float c, int n, char *argv[]){
 	refRemaining = N;
 	
 	createPages();
+	dirty = false;
+
 }
 
 void Process::createPages(){
