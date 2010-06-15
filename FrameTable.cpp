@@ -6,14 +6,25 @@
 #include "FrameTable.h"
 #include <iostream>
 
-FrameTable::FrameTable (int m, int p){
+FrameTable::FrameTable (int m, int p, char type){
 	machineSize = m;
 	pageSize = p;
 	frames = machineSize/pageSize;
 	frame_ptr = frames - 1;
-	lru = true;
-	//this->frameVector = deque<Page>(frames);
+	if(type == 0){
+			lru = true;
+			ran = false;
+	}
+	if(type > 0){
+			ran = true;
+			lru = false;
+	}
+	else{
+			lru = false;
+			ran = false;
+	}
 }
+	//this->frameVector = deque<Page>(frames);
 
 int FrameTable::request(Page page, int time){
 	if(!frameVector.empty()){
@@ -21,11 +32,19 @@ int FrameTable::request(Page page, int time){
 		for(int i = 0; i < frameVector.size(); i++, iter++){
 			if(*iter == page){
 				printf(":\n hit in frame %i", frames-i-1);
-				if(lru){
+				if(ran){
+					deque<Page>::iterator newIter = frameVector.begin();
+					int j =  randomNumber(frameVector.size());
+					Page temp = frameVector.at(j);
+					frameVector.erase(newIter + j);
+					frameVector.push_back(temp);					
+				}
+				else if(lru){
 					Page temp = frameVector.at(i);
 					frameVector.erase(iter);
 					frameVector.push_back(temp);
 				}
+				
 				return 1;
 			}
 		}

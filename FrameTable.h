@@ -39,12 +39,16 @@ class FrameTable{
 	deque<Page> frameVector;
 	void fifoReplace(Page, int);
 public:
-	bool lru;
-	
-	FrameTable (int, int);
+	bool lru, ran;
+	FrameTable (int, int, char);
 	int request (Page, int);
 	int faults[5];
 	vector<float> residency[5];
+	
+	int randomNumber(int hi){
+		const float scale = rand()/float(RAND_MAX);
+		return int(scale*hi);
+	}
 };
 
 

@@ -7,6 +7,7 @@
 #include <iostream>
 #include <queue>
 #include <cstdlib>
+#include <string>
 #include "LineReader.h"
 #include "Process.h"
 

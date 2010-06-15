@@ -4,6 +4,7 @@ int Page::count = 0;
 
 int main(int argc, char *argv[]){
 	int M, P, S, J, N;
+	string R;
 
 	//Convert argument string values to integers
 	M = atoi(argv[1]);
@@ -11,7 +12,8 @@ int main(int argc, char *argv[]){
 	S = atoi(argv[3]);
 	J = atoi(argv[4]);
 	N = atoi(argv[5]);
-
+	R = argv[6];
+	char type = R.compare("lru");
 
 	for(int i = 1; i < argc; i++)
 		cout << argv[i] << " ";
@@ -49,7 +51,7 @@ int main(int argc, char *argv[]){
 	}
 
 	LineReader reader("random-numbers.txt");
-	FrameTable ft(M, P);
+	FrameTable ft(M, P, type);
 	int k = 1;
 	int time = 1;
 	for(int j = 0; j < N*processes; ){
