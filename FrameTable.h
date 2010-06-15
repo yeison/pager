@@ -37,7 +37,7 @@ class FrameTable{
 	int frames;
 	int frame_ptr;
 	deque<Page> frameVector;
-	void fifoReplace(Page, int);
+	void replace(Page, int);
 public:
 	bool lru, ran;
 	FrameTable (int, int, char);

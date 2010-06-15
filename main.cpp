@@ -17,10 +17,12 @@ int main(int argc, char *argv[]){
 	//to figure out which case is used.
 	char type = R.compare("lru");
 
-	cout << endl;
-	for(int i = 1; i < argc; i++)
-		cout << argv[i] << " ";
-	cout << endl;
+	cout << "The Machine Size is " << M << endl;
+	cout << "The Page Size is " << P << endl;
+	cout << "The Process Size is " << S << endl;
+	cout << "The Job mix is " << J << endl;
+	cout << "The number of references per process is " << N << endl;
+	cout << "The replacement algorithm is " << R << endl;
 
 	int processes;
 	queue<Process> pQue;
