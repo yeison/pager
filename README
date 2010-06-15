@@ -1,0 +1,16 @@
+Yeison Rodriguez
+Operating Systems Paging Assignment
+
+Requirements:
+	Gnu Make
+	gcc
+	random-numbers.txt (included with the source code)
+	
+
+Building:
+	A makefile has been included with this source code.  To build the program, simply navigate to the extracted folder through a terminal and type 'make'.
+
+Running:
+	The executable created by the makefile is named pager.  Input as described at http://www.cs.nyu.edu/courses/fall09/V22.0202-002/labs/paging/index.html is required as arguments to the program.  For example: 
+
+	 ./pager 20 10 10 2 10 lru 0  
