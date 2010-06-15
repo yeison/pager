@@ -1,6 +1,8 @@
 /*
  *  LineReader.cpp
  *  paging
+ * The LineReader program reads the list of random numbers provided.  This program
+ * contains a method to easily access the next random number in the list.
 */
 #include "LineReader.h"
 

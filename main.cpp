@@ -13,8 +13,11 @@ int main(int argc, char *argv[]){
 	J = atoi(argv[4]);
 	N = atoi(argv[5]);
 	R = argv[6];
+	//Read the type of the replacement algorithm. There are 3 possibilities.  I use string.compare
+	//to figure out which case is used.
 	char type = R.compare("lru");
 
+	cout << endl;
 	for(int i = 1; i < argc; i++)
 		cout << argv[i] << " ";
 	cout << endl;
@@ -50,6 +53,7 @@ int main(int argc, char *argv[]){
 			break;
 	}
 
+	//Read the list of random numbers.
 	LineReader reader("random-numbers.txt");
 	FrameTable ft(M, P, type);
 	int k = 1;
@@ -75,6 +79,7 @@ int main(int argc, char *argv[]){
 
 	cout << endl;
 
+	//Sum the total number of faults. In addition, calculate the overall average residency.
 	int totalFaults = 0;
 	int i;
 	float overall;
@@ -102,6 +107,7 @@ int main(int argc, char *argv[]){
 
 }
 
+//The driver determines what kind of reference is being made.
 int driver(double y, int w, Process p){
 	if (y < p.A)
 		return (w + 1 + p.size)%p.size;

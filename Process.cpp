@@ -1,6 +1,10 @@
 /*
  *  Process.cpp
  *  paging
+ 
+ An instance of Process contains much of the input data.  In addition, the probabilities
+ for A, B, C, and random type references are contained in the process.
+ 
  */
 
 #include "Process.h"
