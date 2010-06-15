@@ -10,7 +10,7 @@ LineReader::LineReader(const char *fileName){
 
 string LineReader::nextLine(){
 	string line;
-	if(inStream.is_open()){
+	if(inStream){
 		if(!inStream.eof()){
 			getline(inStream, line);
 			return line;
@@ -27,6 +27,5 @@ string LineReader::nextLine(){
 }
 
 int LineReader::nextRan(){
-	int ref = atoi(this->nextLine().c_str());
-	return ref;
+	return atoi(this->nextLine().c_str());
 }

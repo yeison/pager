@@ -48,7 +48,7 @@ int main(int argc, char *argv[]){
 			break;
 	}
 
-	LineReader reader("random-numbers");
+	LineReader reader("random-numbers.txt");
 	FrameTable ft(M, P);
 	int k = 1;
 	int time = 1;
@@ -73,7 +73,7 @@ int main(int argc, char *argv[]){
 
 	cout << endl;
 
-	int totalFaults;
+	int totalFaults = 0;
 	int i;
 	float overall;
 	for (i = 1; i <= processes; i++) {

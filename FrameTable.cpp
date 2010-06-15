@@ -11,16 +11,24 @@ FrameTable::FrameTable (int m, int p){
 	pageSize = p;
 	frames = machineSize/pageSize;
 	frame_ptr = frames - 1;
+	lru = true;
 	//this->frameVector = deque<Page>(frames);
 }
 
 int FrameTable::request(Page page, int time){
 	if(!frameVector.empty()){
-		for(int i = 0; i < frameVector.size(); i++)
-			if(frameVector[i] == page){
+		deque<Page>::iterator iter = frameVector.begin();
+		for(int i = 0; i < frameVector.size(); i++, iter++){
+			if(*iter == page){
 				printf(":\n hit in frame %i", frames-i-1);
+				if(lru){
+					Page temp = frameVector.at(i);
+					frameVector.erase(iter);
+					frameVector.push_back(temp);
+				}
 				return 1;
 			}
+		}
 		
 		if(frameVector.size() == frames)
 			fifoReplace(page, time);
@@ -49,11 +57,11 @@ void FrameTable::fifoReplace(Page page, int time){
 	Page evicted = frameVector.front();
 	frameVector.pop_front();
 	
+	faults[page.process]++;
 	printf(":\n FAULT, evicting page %i of process %i from frame %i", evicted.number, evicted.process, frame_ptr);
 	frame_ptr > 0 ? frame_ptr--:frame_ptr = frames - 1;
 	
 	//Calculate residency time.
 	evicted.outTime = time;
 	residency[evicted.process].push_back(evicted.outTime - evicted.inTime);
-	faults[page.process]++;
 }
