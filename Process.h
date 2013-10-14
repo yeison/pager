@@ -9,6 +9,7 @@
 class Process{
 	bool dirty;
 public:
+    // Word
 	int w;
 	vector<Page> pages;
 	float A, B, C;
@@ -18,5 +19,8 @@ public:
 	Process (float, float, float, int, char**);	
 	
 	void createPages();
-	void setW(int);
+	void setNextReference(int);
+    int driver(double y, int w);
+    int randomNumber(int hi);
+
 };

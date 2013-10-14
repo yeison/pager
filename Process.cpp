@@ -41,9 +41,29 @@ void Process::createPages(){
 	
 }
 
-void Process::setW(int k){
+// W is word
+void Process::setNextReference(int k){
 	if(!dirty){
-		w = (111*k + size)%size;
+		w = (111*k)%size;
 		dirty = true;
 	}
+}
+
+//The driver determines what kind of reference is being made.
+int Process::driver(double y, int w){
+	if (y < this->A)
+		return (w + 1 + this->size)%this->size;
+	else if (y < this->A + this->B)
+		return (w - 5 + this->size)%this->size;
+	else if (y < this->A + this->B + this->C)
+		return (w + 4 + this->size)%this->size;
+	else
+		return randomNumber(this->size-1);
+}
+
+//Return a random number between 0 and hi (From GotAPI.com).
+int Process::randomNumber(int hi)
+{
+	const float scale = rand()/float(RAND_MAX);
+	return int(scale*hi);
 }

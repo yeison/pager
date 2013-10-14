@@ -5,6 +5,8 @@
 #include <deque>
 #include <queue>
 #include <vector>
+#include <array>
+#include <boost/container/map.hpp>
 
 using namespace std;
 
@@ -25,6 +27,15 @@ public:
 		process = p;
 		number = n;
 	}
+    
+    int getPageId(){
+        return pageId;
+    }
+    
+    pair<int, Page> getPair(){
+        return *new pair<int, Page>(pageId, *this);
+    }
+    
 	//Overload the == operator to define equality by pageId.
 	bool operator== (Page that){
 		return pageId == that.pageId;
@@ -36,13 +47,14 @@ class FrameTable{
 	int pageSize;
 	int frames;
 	int frame_ptr;
+    boost::container::map<int, Page> frameMap;
 	deque<Page> frameVector;
 	void replace(Page, int);
 public:
 	bool lru, ran;
 	FrameTable (int, int, char);
 	int request (Page, int);
-	int faults[5];
+    array<int, 5> faults = {0};
 	vector<float> residency[5];
 	
 	int randomNumber(int hi){
@@ -50,5 +62,3 @@ public:
 		return int(scale*hi);
 	}
 };
-
-

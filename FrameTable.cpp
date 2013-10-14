@@ -67,7 +67,7 @@ int FrameTable::request(Page page, int time){
 			faults[page.process]++;
 		}
 		
-		return - (frames - frameVector.size() + 1);
+		return (frames - frameVector.size() + 1);
 
 	}
 	//If the frameVector is empty, we have a special case to deal with.
@@ -76,7 +76,7 @@ int FrameTable::request(Page page, int time){
 		frameVector.push_back(page);
 		faults[page.process]++; 
 		printf(":\n FAULT, using free frame %i", frames - frameVector.size());
-		return - frames;
+		return frames;
 	}
 }
 
