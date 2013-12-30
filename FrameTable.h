@@ -43,22 +43,22 @@ public:
 };
 
 class FrameTable{
-	int machineSize;
-	int pageSize;
-	int frames;
-	int frame_ptr;
+    int machineSize;
+    int pageSize;
+    unsigned long frames;
+    int frame_ptr;
     boost::container::map<int, Page> frameMap;
-	deque<Page> frameVector;
-	void replace(Page, int);
+    deque<Page> frameVector;
+    void replace(Page, int);
 public:
-	bool lru, ran;
-	FrameTable (int, int, char);
-	int request (Page, int);
+    bool lru, ran;
+    FrameTable (int, int, char);
+    int request (Page, int);
     array<int, 5> faults = {0};
-	vector<float> residency[5];
-	
-	int randomNumber(int hi){
-		const float scale = rand()/float(RAND_MAX);
-		return int(scale*hi);
-	}
+    vector<float> residency[5];
+    
+    int randomNumber(int hi){
+        const float scale = rand()/float(RAND_MAX);
+        return int(scale*hi);
+    }
 };

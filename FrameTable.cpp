@@ -37,7 +37,7 @@ int FrameTable::request(Page page, int time){
 			//If the current element is the page.
 			if(*iter == page){
 				//Inform that there has been a hit.
-				printf(":\n hit in frame %i", frames-i-1);
+				printf(":\n hit in frame %li", frames-i-1);
 				//If the replacement algo is LRU, send the recently used page (the one that has been found) to the back of the queue/vector; it will be replaced last.
 				if(lru){
 					Page temp = frameVector.at(i);
@@ -63,7 +63,7 @@ int FrameTable::request(Page page, int time){
 		else{
 			page.inTime = time;
 			frameVector.push_back(page);
-			printf(":\n FAULT, using free frame %i", frames - frameVector.size());
+			printf(":\n FAULT, using free frame %li", frames - frameVector.size());
 			faults[page.process]++;
 		}
 		
@@ -75,7 +75,7 @@ int FrameTable::request(Page page, int time){
 		page.inTime = time;
 		frameVector.push_back(page);
 		faults[page.process]++; 
-		printf(":\n FAULT, using free frame %i", frames - frameVector.size());
+		printf(":\n FAULT, using free frame %li", frames - frameVector.size());
 		return frames;
 	}
 }
