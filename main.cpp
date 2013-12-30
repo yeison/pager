@@ -9,6 +9,12 @@ void faultMessage(int p, int ref, int pageNumber, int time){
 int main(int argc, char *argv[]){
     int machineSize, pageSize, processSize, jobMix, numberOfReferences;
     string R;
+
+    if(argc < 7 || argc > 8){
+        cout << "Usage: ./pager <Machine-Size> <Page-Size> <Process-Size> <Job-Mix> <# of refs> <replacement algo>\n";
+        cout << "Example: ./pager 10 10 20 1 10 fifo 0 \n";
+        exit(1);
+    }
     
     // Convert argument string values to integers
     machineSize = atoi(argv[1]);
